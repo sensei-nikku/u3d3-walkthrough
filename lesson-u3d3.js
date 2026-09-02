@@ -1,203 +1,227 @@
 /* =====================================================================
    Unit 3 · Day 3 — Three Portfolios, Same Money
-   SCAFFOLDED BUILD. Sixteen small steps instead of six big ones.
+   v3 — teaches formula CONSTRUCTION, not formula transcription.
 
-   The earlier version handed students a finished formula to retype. This
-   one builds every formula out of parts they have already made:
+   Every step body walks the same four questions instead of dictating a
+   string to retype:
 
-     a percent becomes a multiplier -> one year at a time
-     -> three years chained in one line -> absolute refs, at the moment
-     copying starts -> SUM then divide -> AVERAGE as the shorthand
-     -> MIN and MAX separately -> then folded into one expression
+        WANT     what do I want out of this cell?
+        HAVE     what do I already have, and in which cells?
+        CONNECT  what joins them — an operator, or a function?
+        SHAPE    does the answer need rounding to be readable?
 
-   Nothing is introduced before there is a reason to want it.
+   The literal formula lives in `hint`, so a stuck student can still get
+   it, but nobody is handed it before they have made the four decisions.
+   Step 7 makes them choose functions by name from a description, which
+   is the actual skill — knowing MIN exists is useless if you cannot
+   recognise the moment you need it.
    ===================================================================== */
 
 export const lesson = {
   id: 'u3d3',
   unit: 'Unit 3 · Day 3',
   title: 'Three Portfolios, Same Money',
-  blurb: 'Ten thousand dollars, three years, three ways to hold it. We build this one slowly \u2014 first what a percent does to a single year, then all three years at once, then four ways of measuring the result. One of these portfolios wins on average and loses on money.',
-  rows: 44,
+  blurb: 'Ten thousand dollars, three years, three ways to hold it. Every formula in here you will build yourself, using the same four questions each time: WANT — what do I want out? HAVE — what do I already have, and where? CONNECT — what joins them, an operator or a function? SHAPE — does the answer need rounding? Answer those four and the formula writes itself. The hint button has the finished line if you get stuck.',
+  rows: 45,
   cols: 4,
 
   given: {
     A1: 'DIVERSIFICATION — THREE PORTFOLIOS, SAME MONEY',
 
-    A3: 'STARTING AMOUNT',
-    A4: 'Invested in each, at the start', B4: 10000,
+    A3: 'WHAT YOU START WITH',
+    A4: 'Invested in each', B4: 10000,
 
     A6: 'YEARLY RETURNS', B6: 'One stock', C6: '60/40 mix', D6: 'Index fund',
     A7: 'Year 1', B7: 0.65, C7: 0.18, D7: 0.26,
     A8: 'Year 2', B8: -0.45, C8: -0.08, D8: -0.12,
     A9: 'Year 3', B9: 0.30, C9: 0.14, D9: 0.22,
 
-    A11: 'WARM-UP — one year at a time (one stock)',
+    A11: 'A — ONE YEAR AT A TIME (one stock)',
     A12: 'Year 1 multiplier',
     A13: 'Money after year 1',
     A14: 'Money after year 2',
     A15: 'Money after year 3',
 
-    A17: 'NOW ALL THREE YEARS IN ONE FORMULA',
+    A17: 'B — ALL THREE YEARS IN ONE CELL',
     A18: 'Ending value',
 
-    A20: 'AVERAGE — the long way, then the short way',
-    A21: 'Sum of the three years',
-    A22: 'Average, by dividing',
-    A23: 'Average, using AVERAGE()',
+    A20: 'C — NAME THE FUNCTION THAT DOES THE JOB',
+    A21: 'Adds up a list of numbers',
+    A22: 'Gives the mean of a list',
+    A23: 'Gives the smallest in a list',
+    A24: 'Gives the largest in a list',
 
-    A25: 'WORST YEAR, BEST YEAR, AND THE SWING',
-    A26: 'Worst year',
-    A27: 'Best year',
-    A28: 'Swing: best minus worst',
+    A26: 'D — AVERAGE YEARLY RETURN',
+    A27: 'Sum of the three years',
+    A28: 'Average, by dividing',
+    A29: 'Average, using a function',
 
-    A30: 'THE VERDICT',
-    A31: 'Highest average return?',
-    A32: 'Most money at the end?',
+    A31: 'E — WORST, BEST, AND THE SWING',
+    A32: 'Worst year',
+    A33: 'Best year',
+    A34: 'Swing: best minus worst',
 
-    A34: 'FINISH EARLY — make year 2 worse',
-    A35: 'New year 2 for the one stock',
-    A36: 'New ending value',
-    A37: 'Does it still beat the index fund?',
+    A36: 'F — THE VERDICT',
+    A37: 'Highest average return?',
+    A38: 'Most money at the end?',
+
+    A40: 'G — FINISH EARLY: make year 2 worse',
+    A41: 'New year 2 for the one stock',
+    A42: 'New ending value',
+    A43: 'Still beat the index fund?',
   },
 
   steps: [
 
-    /* ---- warm-up: what a percent actually does to money ---------- */
+    /* ---- A. one year at a time ----------------------------------- */
     {
-      title: 'Turn a percent into a multiplier',
-      body: 'Before any big formula, one small idea. A return of +65% means your money becomes 165% of what it was \u2014 you multiply by 1.65. So the multiplier is always 1 plus the return. Cell B7 already holds 0.65. In B12, type =1+B7',
-      hint: 'Type the equals sign first, then 1, then +, then B7. Press Enter.',
+      title: 'A1 · Turn a percent into a multiplier',
+      body: 'First formula, and we will do all four questions out loud.\n\nWANT: a number I can multiply money by, so that +65% happens to it.\nHAVE: the return itself, sitting in B7 as 0.65.\nCONNECT: +65% means the money becomes 165% of what it was, so the multiplier is 1 plus the return. That is addition.\nSHAPE: nothing to shape yet.\n\nEvery formula starts with = so the sheet knows to compute instead of just storing text. Build it in B12.',
+      hint: 'Equals sign, then 1, then a plus, then the cell that holds the return:  =1+B7',
       targets: [{ cell: 'B12', value: 1.65, mustBeFormula: true }],
-      note: '1.65. You did not type 1.65 \u2014 you built it from the return. That matters, because later you will change a return and want everything downstream to follow on its own.',
+      note: '1.65. Notice you did not type 1.65 anywhere \u2014 you pointed at B7 and let the sheet work it out. That is the difference between a spreadsheet and a calculator, and it is why changing B7 later will move everything downstream on its own.',
     },
     {
-      title: 'One year of growth',
-      body: 'Now use it. The starting amount is in B4 and your multiplier is in B12. In B13, type =B4*B12',
-      hint: 'A star * means multiply. The whole formula is =B4*B12',
+      title: 'A2 · One year of growth',
+      body: 'Same four questions, faster.\n\nWANT: the balance after one year.\nHAVE: the starting amount in B4, and the multiplier you just built in B12.\nCONNECT: to grow money by a multiplier you multiply. The symbol is *\nSHAPE: not yet.\n\nWrite it in B13.',
+      hint: '=B4*B12',
       targets: [{ cell: 'B13', value: 16500, mustBeFormula: true }],
-      note: '$16,500 after one year. A great year.',
+      note: '$16,500. A very good year.',
     },
     {
-      title: 'Year two, on the new balance',
-      body: 'Year 2 is \u201345%, so the multiplier is 1 + (\u20130.45) = 0.55 \u2014 and you do not have to work that out, because B8 already holds \u20130.45. Year 2 grows the balance you ended year 1 with, not the original $10,000. In B14, type =B13*(1+B8)',
-      hint: 'The parentheses around (1+B8) matter. They tell the sheet to add first, then multiply.',
+      title: 'A3 · Year two \u2014 you decide what to point at',
+      body: 'Year 2 returns \u201345%. Work the questions before you type.\n\nWANT: the balance after year 2.\nHAVE: two candidates for the starting point \u2014 B4 ($10,000) and B13 ($16,500). Only one is right. Year 2 grows whatever you finished year 1 with.\nCONNECT: a multiplier again. But you do not have a cell holding year 2\u2019s multiplier, so build it inside the formula: (1+B8). The parentheses force the addition to happen before the multiplication.\nSHAPE: not yet.\n\nWrite it in B14.',
+      hint: 'Start from the year-1 balance, not the original deposit:  =B13*(1+B8)',
       targets: [{ cell: 'B14', value: 9075, mustBeFormula: true }],
-      note: '$9,075 \u2014 below where you started, after a year that gained 65% and a year that lost 45%. Percentages do not cancel out, because the loss is taken from a bigger number than the gain was.',
+      note: '$9,075 \u2014 below where you started, after one year up 65% and one year down 45%. Percentages do not cancel, because the 45% came off a bigger pile than the 65% was added to. If you got $5,500 you started from B4; go back and look at why that is the wrong cell.',
     },
     {
-      title: 'Year three, rounded to cents',
-      body: 'Same pattern once more, with one addition. Wrap it in ROUND so the answer comes out as money instead of a long decimal. ROUND takes two things: what to round, and how many decimal places. In B15, type =ROUND(B14*(1+B9),2)',
-      hint: 'The 2 at the end means two decimal places, so cents. Count your parentheses \u2014 one opens after ROUND, one opens before 1+B9.',
+      title: 'A4 · Year three, and the SHAPE question finally matters',
+      body: 'WANT: the balance after year 3.\nHAVE: the year-2 balance in B14, and the year-3 return in B9.\nCONNECT: multiply by (1+B9), same as last time.\nSHAPE: this one is money, and money has two decimal places. ROUND fixes that.\n\nHere is how a function is written, and it never changes:\n\n        NAME( argument , argument )\n\nA name, then parentheses, then the things it needs, separated by commas. ROUND needs two: what to round, and how many decimals. So ROUND( your calculation , 2 ). Build it in B15.',
+      hint: 'Put the whole multiplication inside ROUND as its first argument, and 2 as its second:  =ROUND(B14*(1+B9),2)',
       targets: [{ cell: 'B15', value: 11797.5, mustBeFormula: true }],
-      note: '$11,797.50 after three years. Hold on to that number.',
+      note: '$11,797.50. Four cells, one year at a time. Remember that number \u2014 you are about to get it a second way.',
     },
 
-    /* ---- compress it, and meet absolute refs when they pay off --- */
+    /* ---- B. compress, and meet absolute refs when they pay off --- */
     {
-      title: 'All three years in one line',
-      body: 'Four cells did that. One cell can. Instead of stepping through a running balance, chain all three multipliers together. In B18, type =ROUND($B$4*(1+B7)*(1+B8)*(1+B9),2)',
-      hint: 'The dollar signs in $B$4 lock that cell in place. Nothing else changes yet \u2014 the next step is where it pays off.',
+      title: 'B1 · Collapse four cells into one',
+      body: 'You now know what each year does. So skip the intermediate balances and chain the multipliers together in a single cell.\n\nWANT: the same ending value, in one step.\nHAVE: the deposit in B4 and three returns in B7, B8, B9.\nCONNECT: multiply the deposit by all three multipliers, one after another.\nSHAPE: ROUND to 2, same as before.\n\nOne change: write the deposit as $B$4 instead of B4. The dollar signs pin it. It makes no difference right now \u2014 the next step is where it matters. Build it in B18.',
+      hint: '=ROUND($B$4*(1+B7)*(1+B8)*(1+B9),2)',
       targets: [{ cell: 'B18', value: 11797.5, mustBeFormula: true }],
-      note: 'Identical to B15. Same math, one line. Stepping through was for understanding; chaining is for working.',
+      note: 'The same $11,797.50 you got in B15. Two routes, one answer \u2014 which is how you know the compressed version is not a trick.',
     },
     {
-      title: 'Why the dollar signs earn their keep',
-      body: 'Now the other two portfolios. The formula is the same shape \u2014 only the column letter moves. In C18 type =ROUND($B$4*(1+C7)*(1+C8)*(1+C9),2) and in D18 the same thing with D.',
-      hint: 'Every B7, B8, B9 becomes C7, C8, C9 \u2014 but $B$4 stays exactly as written, because all three portfolios start from the same $10,000.',
+      title: 'B2 · Now the pinning pays for itself',
+      body: 'Do the same for the other two portfolios. The shape of the formula does not change at all; only which column the returns come from.\n\nAsk the HAVE question carefully: the 60/40 returns are in C7, C8, C9. The index returns are in D7, D8, D9. But all three portfolios start from the same $10,000 \u2014 the one cell that should NOT change as you move across. That is what $B$4 protects.\n\nBuild C18 and D18.',
+      hint: 'Copy your B18 formula and change every B7/B8/B9 to C7/C8/C9. Leave $B$4 alone. Then repeat with D.',
       targets: [
         { cell: 'C18', value: 12375.84, mustBeFormula: true },
         { cell: 'D18', value: 13527.36, mustBeFormula: true },
       ],
-      note: 'That is what locking a cell is for: one number every formula needs, written once. Now look across row 18 \u2014 the single stock came last.',
+      note: 'That is the whole point of locking a cell: a value every formula needs, written once. Now read across row 18. The single stock finished last, and it is not close.',
     },
 
-    /* ---- average: long way first, shorthand second --------------- */
+    /* ---- C. choosing the function IS the skill -------------------- */
     {
-      title: 'Add up the three returns',
-      body: 'Next measure: the average yearly return. Do it the long way first, so the shortcut means something. SUM adds a range, and B7:B9 means everything from B7 down to B9. In B21, type =SUM(B7:B9)',
-      hint: 'The colon makes a range. Typing =B7+B8+B9 gives the same answer.',
-      targets: [{ cell: 'B21', value: 0.5, mustBeFormula: true }],
-      note: '0.5 \u2014 fifty percentage points spread across three years.',
+      title: 'C · Pick the tool before you use it',
+      body: 'Four measures are coming, and each one needs a different function. Knowing that MIN exists is useless if you cannot spot the moment you need it \u2014 so match them first, before there is any arithmetic to hide behind.\n\nFour function names: SUM, AVERAGE, MIN, MAX. Column A describes what each one does. Type the matching name into B21, B22, B23 and B24. Just the name, no equals sign and no parentheses \u2014 you are labelling, not calculating yet.',
+      hint: 'Read each description literally. "Adds up a list" is SUM. "Mean of a list" is AVERAGE. "Smallest" is MIN, and MIN is short for minimum.',
+      targets: [
+        { cell: 'B21', value: 'SUM', text: true },
+        { cell: 'B22', value: 'AVERAGE', text: true },
+        { cell: 'B23', value: 'MIN', text: true },
+        { cell: 'B24', value: 'MAX', text: true },
+      ],
+      note: 'Those four cover most of what anyone does to a column of numbers. From here on, when you know what you want, ask which of these four gets it \u2014 that question does more work than memorising syntax.',
+    },
+
+    /* ---- D. average: long way, then the shorthand ---------------- */
+    {
+      title: 'D1 · Add up the three returns',
+      body: 'WANT: the three yearly returns added together.\nHAVE: them in B7, B8 and B9.\nCONNECT: you named the function for this in B21.\nSHAPE: leave it raw for now.\n\nOne new piece of syntax. Instead of listing three cells, you can give a function a RANGE \u2014 a start cell, a colon, an end cell. B7:B9 means "B7, B8, B9 and anything between." Build the sum in B27.',
+      hint: 'Function name, parentheses, one range argument:  =SUM(B7:B9)  \u2014 typing =B7+B8+B9 gets the same number.',
+      targets: [{ cell: 'B27', value: 0.5, mustBeFormula: true }],
+      note: '0.5 \u2014 fifty percentage points, spread across three years.',
     },
     {
-      title: 'Divide to get the average',
-      body: 'An average is a sum divided by how many things you added. Three years, so divide by 3. In B22, type =ROUND(B21/3,4)',
-      hint: 'A slash / means divide. Four decimal places this time, because these are rates rather than dollars.',
-      targets: [{ cell: 'B22', value: 0.1667, mustBeFormula: true }],
+      title: 'D2 · Turn a sum into an average yourself',
+      body: 'Before using AVERAGE, do what it does by hand, so you know what it is doing.\n\nWANT: the average of the three returns.\nHAVE: the sum, in B27.\nCONNECT: an average is a sum divided by how many things went into it. Three years, so divide by 3. The divide symbol is /\nSHAPE: these are rates, not dollars, so 4 decimals rather than 2.\n\nBuild it in B28.',
+      hint: '=ROUND(B27/3,4)',
+      targets: [{ cell: 'B28', value: 0.1667, mustBeFormula: true }],
       note: '0.1667, which reads as 16.67% a year on average.',
     },
     {
-      title: 'The shorthand',
-      body: 'Two cells to get one average is a lot of work. AVERAGE does the summing and the dividing in a single move. In B23, type =ROUND(AVERAGE(B7:B9),4)',
-      hint: 'Same range as SUM. The answer should match B22 exactly.',
-      targets: [{ cell: 'B23', value: 0.1667, mustBeFormula: true }],
-      note: 'Same answer. Now you know what AVERAGE is doing underneath, which is the only way to notice when it is the wrong tool for a job.',
+      title: 'D3 · Now let the function do it',
+      body: 'Two cells for one average is a lot of work. AVERAGE does the adding and the dividing in one move.\n\nWANT: the same average, in one cell.\nHAVE: the range B7:B9.\nCONNECT: the function you named in B22, taking one range argument \u2014 exactly like SUM did.\nSHAPE: ROUND to 4.\n\nBuild it in B29. It should match B28 exactly. If it does not, one of the two is wrong.',
+      hint: 'Swap SUM for AVERAGE inside the ROUND:  =ROUND(AVERAGE(B7:B9),4)',
+      targets: [{ cell: 'B29', value: 0.1667, mustBeFormula: true }],
+      note: 'Matching answers. You now know what AVERAGE is doing under the hood, which is the only way you will ever notice when it is the wrong tool for a job.',
     },
     {
-      title: 'Average the other two',
-      body: 'In C23 and D23, do the same for the 60/40 mix and the index fund.',
-      hint: '=ROUND(AVERAGE(C7:C9),4) and then the same with D.',
+      title: 'D4 · Across the other two columns',
+      body: 'Same formula, different column. Ask HAVE and nothing else: where do the 60/40 returns live, and where do the index returns live?\n\nBuild C29 and D29.',
+      hint: 'Only the column letter inside the range changes:  =ROUND(AVERAGE(C7:C9),4)  then the same with D.',
       targets: [
-        { cell: 'C23', value: 0.08, mustBeFormula: true },
-        { cell: 'D23', value: 0.12, mustBeFormula: true },
+        { cell: 'C29', value: 0.08, mustBeFormula: true },
+        { cell: 'D29', value: 0.12, mustBeFormula: true },
       ],
-      note: 'Stop and read row 23 against row 18. The single stock has the HIGHEST average yearly return \u2014 16.67% against 12% and 8% \u2014 and in row 18 it has the LEAST money. Both numbers are true. Only one of them is your money.',
+      note: 'Stop here and read row 29 against row 18. The single stock has the HIGHEST average yearly return of the three \u2014 16.67% against 12% and 8% \u2014 and in row 18 it has the LEAST money. Both numbers are true. Only one of them is your money.',
     },
 
-    /* ---- worst, best, swing -------------------------------------- */
+    /* ---- E. worst, best, swing ----------------------------------- */
     {
-      title: 'The worst year',
-      body: 'An average hides the years that hurt, so go find them. MIN returns the smallest value in a range. In B26, type =MIN(B7:B9)',
-      hint: 'Same range shape as SUM and AVERAGE. The answer is negative.',
-      targets: [{ cell: 'B26', value: -0.45, mustBeFormula: true }],
-      note: 'There it is. A 45% fall, and the +30% that followed could not undo it, because the +30% was taken from a much smaller pile.',
+      title: 'E1 · Find the year that hurt',
+      body: 'An average hides its worst year, so go get it.\n\nWANT: the smallest of the three returns.\nHAVE: the range B7:B9.\nCONNECT: the function you named in B23.\nSHAPE: nothing \u2014 it is already one of the numbers on screen.\n\nBuild it in B32.',
+      hint: 'Same shape as SUM and AVERAGE, one range argument:  =MIN(B7:B9)',
+      targets: [{ cell: 'B32', value: -0.45, mustBeFormula: true }],
+      note: 'A 45% fall. The +30% that followed could not undo it, because that +30% was taken from a much smaller pile.',
     },
     {
-      title: 'The best year',
-      body: 'MAX is MIN\u2019s twin. In B27, type =MAX(B7:B9)',
-      hint: 'Identical to the last step, with MAX in place of MIN.',
-      targets: [{ cell: 'B27', value: 0.65, mustBeFormula: true }],
+      title: 'E2 · And the best year',
+      body: 'You already know how this one goes. WANT the largest of the three, HAVE the same range, CONNECT with the function from B24. Build it in B33.',
+      hint: 'Identical to the last step with MAX instead of MIN:  =MAX(B7:B9)',
+      targets: [{ cell: 'B33', value: 0.65, mustBeFormula: true }],
     },
     {
-      title: 'The swing, built from your own two cells',
-      body: 'How far apart were the best and worst years? That distance is what volatility feels like from the inside. Use the two cells you just made. In B28, type =ROUND(B27-B26,4)',
-      hint: 'B26 is negative, so subtracting it makes the answer bigger. 0.65 minus \u20130.45 is 1.10, not 0.20. That is arithmetic, not a bug.',
-      targets: [{ cell: 'B28', value: 1.1, mustBeFormula: true }],
-      note: '1.10 \u2014 a hundred and ten percentage points between this portfolio\u2019s best year and its worst.',
+      title: 'E3 · The swing, from two cells you own',
+      body: 'How far apart were the best and worst years? That distance is what volatility feels like from the inside.\n\nWANT: the gap between best and worst.\nHAVE: both of them already, in B33 and B32.\nCONNECT: subtract. The minus symbol is -\nSHAPE: a rate, so 4 decimals.\n\nBefore you press Enter, predict the answer. B32 is negative, so subtracting it makes the result BIGGER, not smaller. Build it in B34.',
+      hint: 'Best minus worst, in that order:  =ROUND(B33-B32,4)  \u2014 0.65 minus \u20130.45 is 1.10.',
+      targets: [{ cell: 'B34', value: 1.1, mustBeFormula: true }],
+      note: '1.10 \u2014 a hundred and ten percentage points between this portfolio\u2019s best year and its worst. If you got 0.20 you added the negative instead of subtracting it.',
     },
     {
-      title: 'Swing for the other two, folded into one formula',
-      body: 'You do not need separate MIN and MAX cells every time \u2014 they can go straight inside one expression. In C28 type =ROUND(MAX(C7:C9)-MIN(C7:C9),4) and do the same in D28.',
-      hint: 'Same idea as B28, with MAX and MIN written inline instead of pointing at the cells above.',
+      title: 'E4 · Nest the functions instead of storing them',
+      body: 'For the other two columns, you are not going to build separate MIN and MAX cells. A function can go straight inside another expression \u2014 anywhere a number could sit, a function that produces a number can sit instead.\n\nSo instead of pointing at two cells, put MAX and MIN directly into the subtraction. Build C34 and D34.',
+      hint: 'Replace B33 and B32 with the functions themselves:  =ROUND(MAX(C7:C9)-MIN(C7:C9),4)  then the same with D.',
       targets: [
-        { cell: 'C28', value: 0.26, mustBeFormula: true },
-        { cell: 'D28', value: 0.38, mustBeFormula: true },
+        { cell: 'C34', value: 0.26, mustBeFormula: true },
+        { cell: 'D34', value: 0.38, mustBeFormula: true },
       ],
-      note: '110 against 26 and 38. Same three years for all three portfolios. The only difference is how the money was spread out.',
+      note: '110 against 26 and 38. Same three years for every portfolio \u2014 the only difference is how the money was spread. And you just wrote a formula three levels deep: ROUND holding a subtraction holding two functions. That is all nesting ever is.',
     },
 
-    /* ---- verdict ------------------------------------------------- */
+    /* ---- F. verdict ---------------------------------------------- */
     {
-      title: 'Read your own table back',
-      body: 'Answer from the cells you built, not from memory. In B31, type the name of the portfolio with the highest average yearly return. In B32, the one that ended with the most money. Spell them exactly as they appear in row 6.',
-      hint: 'Row 23 holds the averages, row 18 holds the ending values. They do not point at the same column.',
+      title: 'F · Read your own table back',
+      body: 'No formulas here. Answer from the cells you built, not from memory. In B37 type the portfolio with the highest average yearly return. In B38 type the one that ended with the most money. Spell them exactly as they appear in row 6.',
+      hint: 'Row 29 holds the averages. Row 18 holds the ending values. They do not point at the same column, and that is the finding.',
       targets: [
-        { cell: 'B31', value: 'One stock', text: true },
-        { cell: 'B32', value: 'Index fund', text: true },
+        { cell: 'B37', value: 'One stock', text: true },
+        { cell: 'B38', value: 'Index fund', text: true },
       ],
-      note: 'Two different portfolios. That gap is the whole lesson: an average return tells you nothing about what you end up holding, and one terrible year in a concentrated bet does damage the good years cannot repair.',
+      note: 'Two different portfolios. That gap is the whole lesson: an average return tells you nothing about what you actually end up holding, and one terrible year in a concentrated bet does damage the good years cannot repair.',
     },
 
-    /* ---- finish early -------------------------------------------- */
+    /* ---- G. finish early ----------------------------------------- */
     {
-      title: 'Finish early \u2014 make year 2 worse',
-      body: 'One company can have a far worse year than a basket of five hundred. In B35, type -0.6 for a 60% drop. Then in B36 build the ending value using that new cell: =ROUND($B$4*(1+B7)*(1+B35)*(1+B9),2). Finally in B37, type Yes or No \u2014 does the one stock still beat the index fund?',
-      hint: 'B36 is your B18 formula with B35 in place of B8. Compare the result against D18.',
+      title: 'G · Finish early \u2014 break it on purpose',
+      body: 'One company can have a far worse year than a basket of five hundred. Test it.\n\nIn B41, type -0.6 \u2014 a 60% drop, no formula needed, just the number.\n\nThen in B42 build the ending value again, but point year 2 at your new cell instead of at B8. Everything else is identical to B18. Ask yourself which single reference has to change.\n\nThen in B43, type Yes or No: does the one stock still beat the index fund?',
+      hint: 'Take your B18 formula and swap B8 for B41:  =ROUND($B$4*(1+B7)*(1+B41)*(1+B9),2). Compare the result against D18.',
       targets: [
-        { cell: 'B35', value: -0.6 },
-        { cell: 'B36', value: 8580, mustBeFormula: true },
-        { cell: 'B37', value: 'No', text: true },
+        { cell: 'B41', value: -0.6 },
+        { cell: 'B42', value: 8580, mustBeFormula: true },
+        { cell: 'B43', value: 'No', text: true },
       ],
       note: '$8,580 \u2014 less than the $10,000 that went in, after a year that gained 65% and a year that gained 30%. An index fund holding five hundred companies cannot fall 60% because one of them had a catastrophe. That is not a strategy. It is arithmetic.',
     },
@@ -205,6 +229,6 @@ export const lesson = {
 
   closing: {
     title: 'What you built',
-    body: 'You started by turning one percent into one multiplier and finished with four different measures of three portfolios. No formula was handed to you whole \u2014 every one was assembled from a piece you had already made. Now change B7 to 0.10 and watch which cells care. Or set B4 to 1000 and see which of the four measures move and which do not budge. The model does not care how much money you start with. It cares how the money is spread.',
+    body: 'Seventeen formulas, and you were not handed any of them whole. Every one came out of the same four questions: what do I want, what do I have and where, what connects them, does the answer need shaping. That is the method, and it does not care whether the subject is portfolios or payroll or a grocery budget.\n\nTwo things worth trying now that it works. Change B7 to 0.10 and watch exactly which cells move and which sit still. Then set B4 to 1000 and notice that the ending values all change while the averages, the worst years and the swings do not budge at all \u2014 because those measure the shape of the returns, not the size of the deposit.',
   },
 };
